@@ -1,0 +1,13 @@
+go 1.21.1
+
+use (
+	./arrays
+	./conditionals
+	./examples
+	./functions
+	./greetings
+	./hello
+	./map
+	./operators
+	./slice
+)
