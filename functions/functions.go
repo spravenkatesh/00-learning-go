@@ -64,9 +64,33 @@ func fact(n int) int {
 
 /*
 Higher Order Function
-Defer statement
 */
 
+func area(r float32) float32 {
+	return 3.14 * r * r
+}
+
+func circumference(r float32) float32 {
+	return 2 * 3.14 * r
+}
+
+func diameter(r float32) float32 {
+	return 2 * r
+}
+
+func circleAttr(radius float32, calc func(r float32) float32) {
+	result := calc(radius)
+	fmt.Println("Result: ", result)
+}
+
+func inputFunc(query int) func(r float32) float32{
+	q := map[int]func(r float32) float32{
+		1: area,
+		2: circumference,
+		3: diameter,
+	}
+	return q[query]
+}
 func main() {
 	result := addNums(2, 3)
 	fmt.Println("sum of 2 & 3 is: ", result)
@@ -95,4 +119,19 @@ func main() {
 	}(3)
 	fmt.Printf("Type of y is : %T\n", y)
 	fmt.Printf("Val of y is: %d\n", y)
+
+	var query int
+	var radius float32
+
+	fmt.Println("Enter the radius of a circle: ")
+	fmt.Scanf("%f", &radius)
+	fmt.Println("Enter Query Type: ")
+	fmt.Scanf("%d", &query)
+
+	circleAttr(radius, inputFunc(query))
+
+	// defer
+	nums(20)
+	defer studentData("prasanna", "physics", "maths")
+	fmt.Printf("factorial is : %d\n", fact(5))
 }
